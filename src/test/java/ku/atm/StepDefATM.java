@@ -11,7 +11,6 @@ public class StepDefATM {
 
     ATM atm;
     Bank bank;
-    int last;
 
     boolean validLogin;
 
@@ -26,18 +25,14 @@ public class StepDefATM {
         bank.addCustomer(new Customer(id, pin));
     }
 
-    @Given("a customer with id (\\d+) and pin (\\d+) with balance (.*) exists")
+    @Given("a customer with id (\\d+) and pin (\\d+) with balance (.+) exists")
     public void a_customer_with_id_and_pin_with_balance_exists(int id, int pin, double balance) {
         bank.addCustomer(new Customer(id, pin, balance,0));
-//        customer = new Customer(id,pin);
-//        this.last = id;
     }
 
     @When("I login to ATM with id (\\d+) and pin (\\d+)")
     public void i_login_to_ATM_with_id_and_pin(int id, int pin) {
         validLogin = atm.validateCustomer(id, pin);
-//        customer = new Customer(id,pin);
-//        this.last = id;
     }
 
     @Then("I can login")
@@ -61,7 +56,7 @@ public class StepDefATM {
                 () -> atm.withdraw(amount));
     }
 
-    @When("(.*) customer overdraw (.*) from ATM")
+    @When("(.*) customer overdraws (.*) from ATM")
     public void customer_withdraw_from_atm_more_than_balance(String name, double amount) throws NotEnoughBalanceException {
         if (name.equals("OD")) atm.withdraw(amount);
         assertThrows(NotEnoughBalanceException.class,
