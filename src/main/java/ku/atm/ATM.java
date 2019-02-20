@@ -55,18 +55,27 @@ public class ATM {
         return false;
 	}
 
-	/** 
-      Withdraws amount from current account. 
+	/**
+      Withdraws amount from current account.
       (Precondition: state is TRANSACT)
       @param value the amount to withdraw
 	 */
 	public void withdraw(double value) throws NotEnoughBalanceException {
 		if (state == TRANSACT) {
-			if(currentAccount.getType().equals("OD")){
-				currentAccount = new BankAccount(currentAccount.getBalance(), 10000);
-				currentAccount.withdraw(value);
-			} else currentAccount.withdraw(value);
-        }
+			currentAccount.withdraw(value);
+		}
+	}
+
+	/**
+	 Withdraws amount from current account, also add the negotiated amount.
+	 (Precondition: state is TRANSACT)
+	 @param value the amount to withdraw
+	 */
+	public void overdraw(double value) throws NotEnoughBalanceException {
+		if (state == TRANSACT) {
+			currentAccount = new BankAccount(currentAccount.getBalance(), 10000);
+			currentAccount.withdraw(value);
+		}
 	}
 
 	/** 

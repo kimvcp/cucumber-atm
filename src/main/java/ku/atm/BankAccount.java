@@ -59,7 +59,10 @@ public class BankAccount {
       return balance;
    }
 
-   /**Get type of account.*/
+   /**
+    Gets the type of the account by calculating negotiated number.
+    @return the type
+    */
    public String getType(){
       if (negotiated > 0) accountType = "OD";
       return accountType;
