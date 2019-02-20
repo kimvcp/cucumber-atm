@@ -12,9 +12,9 @@ public class ATMConsoleUI {
 		ATM theATM;
         Bank theBank = new Bank();
 		//readCustomers("customers.txt", theBank);
-		theBank.addCustomer(new Customer(1, 111, 100));
-        theBank.addCustomer(new Customer(2, 222, 200));
-        theBank.addCustomer(new Customer(3, 333, 300));
+		theBank.addCustomer(new Customer(1, 111, 100, 0));
+        theBank.addCustomer(new Customer(2, 222, 200, 0));
+        theBank.addCustomer(new Customer(3, 333, 300, 0));
 		theATM = new ATM(theBank);
 
 		Scanner in = new Scanner(System.in);
@@ -85,7 +85,8 @@ public class ATMConsoleUI {
 			int number = in.nextInt();
 			int pin = in.nextInt();
 			double currentBalance = in.nextDouble();
-			Customer c = new Customer(number, pin, currentBalance);
+
+			Customer c = new Customer(number, pin, currentBalance, 0);
 			bank.addCustomer(c);
 		}
 		in.close();

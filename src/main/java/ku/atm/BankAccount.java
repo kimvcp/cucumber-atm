@@ -5,26 +5,27 @@ package ku.atm;
    deposits and withdrawals.
 */
 public class BankAccount {
-   private double normalBalance;
-   private double oDBalance;
 
-   /**
-      Constructs a bank account with a zero balance.
-   */
-   public BankAccount() {
-
-      normalBalance = 0;
-      oDBalance = 0;
-   }
+   private double balance;
+   private double negotiated = 0;
+   private String accountType  = "normal";
 
    /**
       Constructs a bank account with a given balance.
       @param initialBalance the initial balance
    */
    public BankAccount(double initialBalance) {
+      balance = initialBalance;
+   }
 
-      normalBalance = initialBalance;
-      oDBalance = initialBalance;
+   /**
+      Constructs a bank account with a given balance and can overdraw to negotiated amount.
+      @param initialBalance the initial balance
+      @param  negotiatedAmount the negotiated amount.
+   */
+   public BankAccount(double initialBalance, double negotiatedAmount) {
+      balance = initialBalance;
+      negotiated = negotiatedAmount;
    }
  
    /** 
@@ -32,7 +33,7 @@ public class BankAccount {
       @param amount the amount of money to withdraw
    */
    public void deposit(double amount) {
-      normalBalance = normalBalance + amount;
+      balance = balance + amount;
    }
 
    /**
@@ -40,9 +41,14 @@ public class BankAccount {
       @param amount the amount of money to deposit
    */
    public void withdraw(double amount) throws NotEnoughBalanceException {
-      if (amount > normalBalance)
-         throw new NotEnoughBalanceException("cannot withdraw more than balance");
-      normalBalance -= amount;
+      if (negotiated > 0){
+         if (amount > balance+negotiated) throw new NotEnoughBalanceException("cannot withdraw more than negotiated amount");
+            balance -= amount;
+            negotiated -= balance;
+      } else {
+         if (amount > balance) throw new NotEnoughBalanceException("cannot withdraw more than balance");
+         balance -= amount;
+      }
    }
 
    /** 
@@ -50,8 +56,13 @@ public class BankAccount {
       @return the account balance
    */
    public double getBalance() {
-      return normalBalance;
+      return balance;
    }
 
+   /**Get type of account.*/
+   public String getType(){
+      if (negotiated > 0) accountType = "OD";
+      return accountType;
+   }
 }
 

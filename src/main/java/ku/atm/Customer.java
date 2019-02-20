@@ -13,14 +13,14 @@ public class Customer {
       @param aNumber the customer number
       @param aPin the personal identification number
    */
-   public Customer(int aNumber, int aPin, double currentBalance) {
+   public Customer(int aNumber, int aPin, double currentBalance, double negotiatedAmount) {
       customerNumber = aNumber;
       pin = aPin;
-      account = new BankAccount(currentBalance);
+      account = new BankAccount(currentBalance, negotiatedAmount);
    }
 
    public Customer(int aNumber, int aPin) {
-      this(aNumber, aPin, 0);
+      this(aNumber, aPin, 0, 0);
    }
 
    public int getCustomerNumber() {

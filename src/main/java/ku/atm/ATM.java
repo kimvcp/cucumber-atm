@@ -62,7 +62,10 @@ public class ATM {
 	 */
 	public void withdraw(double value) throws NotEnoughBalanceException {
 		if (state == TRANSACT) {
-            currentAccount.withdraw(value);
+			if(currentAccount.getType().equals("OD")){
+				currentAccount = new BankAccount(currentAccount.getBalance(), 10000);
+				currentAccount.withdraw(value);
+			} else currentAccount.withdraw(value);
         }
 	}
 

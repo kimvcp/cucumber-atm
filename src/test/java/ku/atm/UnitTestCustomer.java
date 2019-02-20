@@ -12,10 +12,11 @@ public class UnitTestCustomer {
     int id = 1;
     int pin = 345;
     double balance = 500;
+    double negotiated = 500;
 
     @BeforeEach
     void init() {
-        customer = new Customer(id, pin, balance);
+        customer = new Customer(id, pin, balance, negotiated);
     }
 
     @Test
