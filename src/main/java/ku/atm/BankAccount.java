@@ -5,13 +5,16 @@ package ku.atm;
    deposits and withdrawals.
 */
 public class BankAccount {
-   private double balance;
+   private double normalBalance;
+   private double oDBalance;
 
    /**
       Constructs a bank account with a zero balance.
    */
    public BankAccount() {
-      balance = 0;
+
+      normalBalance = 0;
+      oDBalance = 0;
    }
 
    /**
@@ -19,7 +22,9 @@ public class BankAccount {
       @param initialBalance the initial balance
    */
    public BankAccount(double initialBalance) {
-      balance = initialBalance;
+
+      normalBalance = initialBalance;
+      oDBalance = initialBalance;
    }
  
    /** 
@@ -27,17 +32,17 @@ public class BankAccount {
       @param amount the amount of money to withdraw
    */
    public void deposit(double amount) {
-      balance = balance + amount;
+      normalBalance = normalBalance + amount;
    }
 
-   /** 
+   /**
       Withdraws money from the account.
       @param amount the amount of money to deposit
    */
    public void withdraw(double amount) throws NotEnoughBalanceException {
-       if (amount > balance)
+      if (amount > normalBalance)
          throw new NotEnoughBalanceException("cannot withdraw more than balance");
-       balance = balance - amount;
+      normalBalance -= amount;
    }
 
    /** 
@@ -45,7 +50,7 @@ public class BankAccount {
       @return the account balance
    */
    public double getBalance() {
-      return balance; 
+      return normalBalance;
    }
 
 }

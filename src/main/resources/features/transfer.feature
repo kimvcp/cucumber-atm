@@ -9,6 +9,6 @@ Background:
 
 Scenario: Transfer amount less than my balance
     When I transfer 20 to customer id 2
-    Then my account balance is 180
+    Then account balance is 180
     And customer id 2 account balance is 70
 

@@ -8,8 +8,8 @@ Background:
 
 Scenario: Withdraw amount less than balance
     When I withdraw 50 from ATM
-    Then my account balance is 150
+    Then account balance is 150
 
 Scenario: Withdraw amount more than balance
     When I overdraw 5000 from ATM
-    Then my account balance is 200
+    Then account balance is 200
